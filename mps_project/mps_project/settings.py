@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a9a(p@fgx)i*-nsq#sa^*w$p@+y11vz&w2atntj4k&j^d-wdd5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['magicpromptstore.pythonanywhere.com']
 
 
 # Application definition
