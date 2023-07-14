@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0px;
+        }
+        body{
+            background-color: #1d1d29;
+        }
+        .link{
+            text-decoration: none;
+            color:white;
+            font-size: larger;
+            text-shadow: 3px 3px 2px black;
+        }
+        .header{
+            display: flex;
+            background-color: #242536;
+            height:130px;
+            padding-top: 30px;
+            justify-content:end;
+            align-items: end;
+            gap:50px;
+        }
+
+        .logo{
+            position: absolute;
+            left:10px;
+            top :10px;
+
+        }
+
+        .mps{
+            position: absolute;
+            left:90px;
+            top :20px;
+            color: gold;
+        }
+
+        .notes2{
+            color:wheat;
+            font-size: 30px;
+        }
+
+        button{
+            background: linear-gradient(to right bottom,violet,gold);
+            border-radius: 10px;
+            width: 200px;
+            height: 50px;
+            font-size: large;
+        }
+        
+        .slogan {
+            margin-top: 20px;
+            font-size: 30px;
+            color:violet;
+            animation: slogan-ani;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes slogan-ani{
+            0%{color:violet} 50%{color:gold} 100%{color:rgb(161, 32, 161)}
+        }
+
+        .button-container{
+            display:flex;
+            left:5%;
+            flex-wrap: wrap;
+            gap:20px;
+            margin-bottom: 20px;
+        }
+
+        .top-prompts{
+            width:500px;
+            height: 300px;
+            background-color: violet;
+            margin-left: 20px;
+        }
+        .top-prompts-container{
+            display:flex;
+            gap:20px;
+            flex-wrap: wrap;
+
+        }
+
+        .question{
+            color:white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size:x-large;
+        }
+
+        .answer{
+            margin-top:20px;
+            color:white;
+            font-family: 'Times New Roman', Times, serif;
+            font-size:larger;
+            background-image: linear-gradient(to right bottom, violet, gold);
+            background-clip: text;
+            -webkit-background-clip: text; /* For Safari/Chrome */
+            color: transparent;
+        }
+          
+    </style>
+</head>
+<body>
+    
+    {% load static %}
+
+    <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
+    <div class="mps">
+        <h1>MagicPromptStore</h1>
+    </div>
+    <div class="header">
+        <a href="{% url 'login_view' %}" class="link">login</a>
+        <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'post_view'%}" class="link">Post</a>
+        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
+        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+    </div>
+
+    <div class="container">
+
+        <h2 class="slogan">
+            Find the best prompts for ChatGPT to make your life Productive and Efficient.
+        </h2>
+        <div class="button-container">
+            <button>Browse Prompts</button>
+            <button>Post a Prompt</button>
+        </div>
+        <div class="top-prompts-container">
+    
+            <h4 class="notes2">
+                Normal Prompts just results generic outputs<br>
+                Use the Engineered prompts from MagicPromptStore to<br>
+                unlock 100% capablity of ChatGPT<br>
+            </h4>
+            <div class="top-prompts">
+                
+            </div>
+            <div class="sep">
+                <div class="question">
+                    What is MagicPromptStore?
+                </div>
+    
+                <div class="answer">
+    
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to MagicPromptStore, the ultimate destination for unlocking the true capabilities of Chat GPT! As a web app designed to enhance your Chat GPT experience, we offer a wide range of carefully curated prompts that will elevate your conversations to a whole new level.
+    
+    With our extensive collection of prompts, you can explore various categories such as writing prompts, journal prompts, creative prompts, and more. Whether you're a writer, a student, a marketer, or simply someone looking to engage in captivating conversations, MagicPromptStore has the perfect prompt for you.<br><br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our platform provides you with the opportunity to browse through thousands of meticulously crafted prompts that have been optimized for SEO. These prompts are designed to spark your creativity, ignite thought-provoking discussions, and unleash the full potential of Chat GPT.
+    
+    At MagicPromptStore, we understand the importance of quality content and user satisfaction. That's why we prioritize offering the best Chat GPT prompts available. Our team of experts continually updates and refreshes our prompt library to ensure that you always have access to the latest and most engaging content.<br><br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether you're searching for prompts to enhance your writing skills, ignite your imagination, or explore new topics, our user-friendly interface makes it easy to find exactly what you need. You can navigate through different categories, search for specific keywords, or even filter prompts based on your preferences.
+    
+    Join our vibrant community of prompt enthusiasts today and unlock the true potential of Chat GPT. Sign up for a free account and start exploring the vast world of prompts that will inspire, challenge, and captivate both you and your AI companion.
+    
+    At MagicPromptStore, we believe that the right prompt has the power to unlock extraordinary conversations. Discover the magic of prompts today and revolutionize your Chat GPT experience.<br>
+                </div>
+        </div>
+
+        </div>
+    </div>
+</body>
+</html>

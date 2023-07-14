@@ -1,0 +1,147 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicPromptStore</title>
+    <style>
+        body {
+            background-color: #1d1d29;
+        }
+        
+        .link {
+            text-decoration: none;
+            color: white;
+            font-size: larger;
+            text-shadow: 3px 3px 2px black;
+        }
+        
+        .header {
+            display: flex;
+            background-color: #242536;
+            height: 130px;
+            padding-top: 30px;
+            justify-content: end;
+            align-items: end;
+            gap: 50px;
+        }
+
+        .logo {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+        }
+
+        .mps {
+            position: absolute;
+            left: 90px;
+            top: 20px;
+            color: gold;
+        }
+        
+        .grid {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .container {
+            position: relative;
+            left: 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+        
+        .card {
+            width: 300px;
+            height: 420px;
+            background-color: #AC39DC;
+            border-radius: 30px;
+            margin: 20px;
+            font-size: large;
+            transition: background-color 0.3s, height 0.3s, font-size 0.3s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            width: 300px;
+            height: 430px;
+            background-color: #AC39DC;
+            border-radius: 30px;
+            margin: 20px;
+            font-size: larger;
+        }
+        
+        .title {
+            margin-top: 3px;
+            height: 15%;
+            border-radius: 30px;
+            background-color: hsl(282, 79%, 21%);
+            text-align: center;
+            padding-top: 10px;
+            color: white;
+            font-size: 20px;
+        }
+        
+        .description {
+            border-radius: 30px;
+            background-color: #470B60;
+            text-align: center;
+            margin: 10px;
+            padding-top: 10px;
+            height: 75%;
+            font-size: 19px;
+            color: gold;
+        }
+        
+        .price {
+            border-radius: 30px;
+            background-color: #FF4500;
+            text-align: center;
+            margin: 10px;
+            width: 60px;
+            position: relative;
+            left: 30%;
+        }
+    </style>
+</head>
+<body>
+    <img src="{% static 'logo.png' %}" width="70px" height="70px" class="logo">
+    <div class="mps">
+        <h1>MagicPromptStore</h1>
+    </div>
+    <div class="header">
+        <a href="{% url 'login_view' %}" class="link">login</a>
+        <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'post_view' %}" class="link">Post</a>
+        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
+        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+    </div>
+
+    <div class="grid">
+        <div class="container">
+            {% for prompt in prompts %}
+                <div class="card" onclick="onSubmit('{{ prompt.title }}')">
+                    <form method="POST" id="myform">
+                        {% csrf_token %}
+                        <input type="hidden" value="" name="thetitle">
+                        <div class="title">
+                            {{ prompt.title }}
+                        </div>
+                        <div class="description">
+                            {{ prompt.description }}
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        function onSubmit(title){
+            var myform = document.getElementById('myform');
+            myform.elements['thetitle'].value = title;
+            myform.submit();
+        }
+    </script>
+</body>
+</html>

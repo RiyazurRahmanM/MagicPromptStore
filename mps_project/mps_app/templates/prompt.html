@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: inline-flex;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left">
+            {{prompt.title}}
+            {{prompt.description}}
+        </div>
+    
+    </div>
+    <div class="right">
+        {{prompt.sample_output}}
+        {{prompt.sample_input}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Form</title>
+    <style>        *{
+        margin:0px;
+    }
+    body{
+        background-color: #1d1d29;
+    }
+    .link{
+        text-decoration: none;
+        color:white;
+        font-size: larger;
+        text-shadow: 3px 3px 2px black;
+    }
+    .header{
+        display: flex;
+        background-color: #242536;
+        height: 130px;
+        padding-top: 30px;
+        justify-content:end;
+        align-items: end;
+        gap:50px;
+    }
+
+    .logo{
+        position: absolute;
+        left:10px;
+        top :10px;
+
+    }
+
+    .mps{
+        position: absolute;
+        left:90px;
+        top :20px;
+        color: gold;
+    }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1d1d29;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        input[type="text"] {
+            border-radius: 5px;
+            padding: 10px;
+            width: 300px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background: linear-gradient(to right bottom, violet, gold);
+            border-radius: 10px;
+            width: 200px;
+            height: 50px;
+            font-size: large;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+
+    <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
+    <div class="mps">
+        <h1>MagicPromptStore</h1>
+    </div>
+    <div class="header">
+        <a href="{% url 'login_view' %}" class="link">login</a>
+        <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'post_view'%}" class="link">Post</a>
+        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
+        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+    </div>
+    <form method="POST" id="myform">
+        <label for="title">Title of Prompt:</label>
+        <input type="text" id="title" name="title">
+        <label for="description">Description of Prompt:</label>
+        <input type="text" id="description" name="description">
+        <label for="prompt">Prompt:</label>
+        <input type="text" id="prompt" name="prompt">
+        <label for="sample_input">Sample Input:</label>
+        <input type="text" id="sample_input" name="sample_input">
+        <label for="sample_output">Sample Output:</label>
+        <input type="text" id="sample_output" name="sample_output">
+        <button onclick="SubmitFunction()">Submit</button>
+    </form>
+
+    <script>
+        function SubmitFunction(){
+            myform = document.getElementById('myform');
+            myform.submit();
+        }
+    </script>
+</body>
+</html>
