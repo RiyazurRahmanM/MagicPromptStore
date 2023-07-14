@@ -3,7 +3,6 @@ from .models import Prompts , Users
 from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-from paypal.standard.ipn.forms import PayPalIPNForm
 # Create your views here.
 
 
