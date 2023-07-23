@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <th>
+            <tr>
+                <td>User</td>
+                <td>Prompt</td>
+                <td>Screenshot</td>
+            </tr>
+        </th>
+        {% if payments %}
+    {% for payment in payments %}
+        <tr>
+            <td>
+                {{ payment.user.email }}
+            </td>
+            <td>
+                {{ payment.prompt.title }}
+            </td>
+            <td>
+                <img src="{{ payment.image.url }}" width="1000px" height="500px">
+            </td>
+            <td>
+                {{ payment.delivery }}
+            </td>
+            <td>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ payment.user.email }}" name="user">
+                    <input type="hidden" value="{{ payment.prompt.title }}" name="prompt">
+                    {% if payment.delivery == "Not Delivered" %}
+                        <button type="submit" name="action" value="deliver">Delivered</button>
+                    {% endif %}
+                    {% if payment.delivery == "Delivered" %}
+                        Delivered
+                    {% endif %}
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+{% endif %}
+</table>
+</body>
+
+<script>
+    function submitFunction(this){
+        const myform = buttonElement.closest('form');
+        myform.submit();
+    }
+</script>
+</html>

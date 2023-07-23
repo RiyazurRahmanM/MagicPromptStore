@@ -3,11 +3,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        *{
+            margin:0px;
+        }
+        body{
+            background-color: #1d1d29;
+        }
+        .link{
+            text-decoration: none;
+            color:white;
+            font-size: larger;
+            text-shadow: 3px 3px 2px black;
+        }
+        .header{
+            display: flex;
+            background-color: #242536;
+            height:170px;
+            padding-top: 30px;
+            justify-content:end;
+            align-items: end;
+            gap:30px;
+            flex-wrap: wrap;
+        }
+
+        .logo{
+            position: absolute;
+            left:10px;
+            top :10px;
+
+        }
+
+        .mps{
+            position: absolute;
+            left:90px;
+            top :20px;
+            color: gold;
+        }
+
+        .qr{
+            display: flex;
+            justify-content: center;
+        }
+
+        .form{
+            color:white;
+        }
+    </style>
 </head>
 <body>
-    Subscribe now for one month:
-    Pay through UPI QR code or UPI id and upload the payment screenshot.
-    <img src="{{ templates/payment.jpeg }}">
-    Within 24 hours your subscripton will be added. From then you will be able to access all the prompts for 30 days. If Subscription is not added within 24 hours you can complaint to our customer care and claim life time Subscription.
+    {% load static %}
+
+    <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
+    <div class="mps">
+        <h1>MagicPromptStore</h1>
+        {%if name%}
+        Welcome Back 
+        {{name}}
+        {% endif %}
+    </div>
+    <div class="header">
+        <a href="{% url 'login_view' %}" class="link">login</a>
+        <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'post_view'%}" class="link">Post</a>
+        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
+        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+    </div>
+
+    <br>
+    <br>
+
+    <h2 class="form">
+
+        Your Prompt will be delivered within few minutes after Uploading payment screenshot. Prompt will be delivered to your account if and only if the payment is valid. <br>Incase if your prompt is not delivered within 24 hours. You can complaint here. If your complaint is valid and fault is from company side we will free all the prompts for your account. Remember that, No Refund of amount will be provided in any situation.
+    </h2><br><br><br><br>
+    <div class="qr">
+
+        <img src="{% static 'payment.jpeg' %}"  height="450px">
+    </div>
+    <form class="form" method="POST" id="myForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div style="display: flex;  justify-content: center">
+            <div>
+                <br><input type="file" class="image" id="image" name="image"> Upload the Screenshot of Payment
+                <br><br><button style="transform: scale(1.6); position:relative; left:10px;" type="button" onclick="submitFuction()">Upload</button>
+            </div>
+        </div>
+    </form>
 </body>
+
+<script>
+    function submitFuction(){
+        myForm = document.getElementById('myForm')
+        const image = document.getElementById('image')
+        const file = image.files[0]
+        if(!file){
+            alert('please upload the screenshot')
+        }
+        else{
+            myForm.submit()
+        }
+    }
+</script>
 </html>

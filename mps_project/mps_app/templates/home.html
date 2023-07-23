@@ -16,6 +16,19 @@
             font-size: larger;
             text-shadow: 3px 3px 2px black;
         }
+        .link2{
+            text-decoration: none;
+            color:black;
+            font-size: larger;
+            text-shadow: 2px 2px 3px black;
+            margin: 0px;
+        }
+        .link3{
+            
+            color:black;
+            font-size: x-large;
+            margin: 0px;
+        }
         .header{
             display: flex;
             background-color: #242536;
@@ -53,7 +66,17 @@
             height: 50px;
             font-size: large;
         }
-        
+        .sticky{
+            padding: 0px;
+            background: burlywood;
+            border-radius: 10px;
+            width: 140px;
+            height: 30px;
+            font-size: medium;
+            position:fixed;
+            right: 0%;
+            top: 0%;
+        }
         .slogan {
             margin-top: 20px;
             font-size: 30px;
@@ -116,6 +139,10 @@
     <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
     <div class="mps">
         <h1>MagicPromptStore</h1>
+        {%if name%}
+        Welcome Back 
+        {{name}}
+        {% endif %}
     </div>
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
@@ -131,8 +158,8 @@
             Find the best prompts for ChatGPT to make your life Productive and Efficient.
         </h2>
         <div class="button-container">
-            <button>Browse Prompts</button>
-            <button>Post a Prompt</button>
+            <button><a href="{% url 'store_view' %}" class="link3">Browse Prompts</a></button>
+            <button><a href="{% url 'post_view' %}" class="link3">Post a Prompt</a></button>
         </div>
         <div class="top-prompts-container">
     
@@ -142,7 +169,9 @@
                 unlock 100% capablity of ChatGPT<br>
             </h4>
             <div class="top-prompts">
-                
+                {% for prompt in prompts%}
+                    <h1>{{prompt.title}}</h1>
+                {% endfor %}
             </div>
             <div class="sep">
                 <div class="question">
@@ -169,5 +198,7 @@
 
         </div>
     </div>
+
+        <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
 </body>
 </html>

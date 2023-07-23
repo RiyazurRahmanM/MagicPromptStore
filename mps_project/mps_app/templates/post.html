@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Form</title>
-    <style>        *{
+    <style>        
+        *{
         margin:0px;
     }
     body{
@@ -53,13 +54,6 @@
             font-family: 'Times New Roman', Times, serif;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
         input[type="text"] {
             border-radius: 5px;
             padding: 10px;
@@ -75,6 +69,33 @@
             font-size: large;
             color: white;
         }
+        
+        .direct{
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .affiliate{
+            display:flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .checkbox{
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            transform: scale(2);
+        }
+
+        .bottom{
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -83,33 +104,76 @@
     <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
     <div class="mps">
         <h1>MagicPromptStore</h1>
+        {%if name%}
+        Welcome Back 
+        {{name}}
+        {% endif %}
     </div>
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
         <a href="{% url 'signup_view' %}" class="link">signup</a>
-        <a href="{% url 'post_view'%}" class="link">Post</a>
         <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
         <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
     </div>
-    <form method="POST" id="myform">
-        <label for="title">Title of Prompt:</label>
-        <input type="text" id="title" name="title">
-        <label for="description">Description of Prompt:</label>
-        <input type="text" id="description" name="description">
-        <label for="prompt">Prompt:</label>
-        <input type="text" id="prompt" name="prompt">
-        <label for="sample_input">Sample Input:</label>
-        <input type="text" id="sample_input" name="sample_input">
-        <label for="sample_output">Sample Output:</label>
-        <input type="text" id="sample_output" name="sample_output">
-        <button onclick="SubmitFunction()">Submit</button>
-    </form>
+    <h1>
+        How Sellers program work?
+    </h1>
+    <div class="direct">
+        <h3>
+            If a direct user buys your prompt you will get 80% of the money he paid and 20% 
+            will be taken by MagicPromptStore Company as Marketplace commision for 
+            Developemt of Marketplace, Maintainence, Hosting, advertising etc.
+        </h3>
+    
+        <img src="{% static 'direct.png' %}" width="500px" height="300px">
+    </div>
 
-    <script>
-        function SubmitFunction(){
-            myform = document.getElementById('myform');
-            myform.submit();
-        }
-    </script>
+    <div class="affiliate">
+        <h3>If the user has signed to the MagicPromptStore because of an affiliate and buys your prompt
+            You will get 70% of the money he paid and 10% will be taken by MagicPromptStore Company
+            as Marketplace commision for Devlopement of Marketplace Maintainence, Hosting, 
+            advertising etc. Remaining 20% will be given to Affiliate.
+        </h3>
+    
+        <img src="{% static 'affiliate.png' %}" width="500px" height="300px">
+    </div>
+
+
+
+    <h4>
+        Terms and Condition:</h4>
+        <p>
+            If a direct user buys your prompt you will get 80% of the money he paid and 20% 
+            will be taken by MagicPromptStore Company as Marketplace commision for 
+            Developemt of Marketplace, Maintainence, Hosting, advertising etc.
+        </p>
+    
+        <p>If the user has signed to the MagicPromptStore because of an affiliate and buys your prompt
+            You will get 70% of the money he paid and 10% will be taken by MagicPromptStore Company as
+            Marketplace commision for Devlopement of Marketplace Maintainence, Hosting, 
+            advertising etc. Remaining 20% will be given to Affiliate.
+        </p>
+
+        <div class="bottom">
+            <div>
+                <form method="POST" id="myForm">
+                    {% csrf_token %}
+                    <input class="checkbox" name="agree" id="checkbox" type="checkbox">I agree to all Terms and Conditions<br>
+                    <button onclick="submitFunction()" type="button">Sell a Prompt</button>
+                </form>
+            </div>
+        </div>
 </body>
+<script>
+    function submitFunction(){
+        myForm = document.getElementById('myForm')
+        checkbox = document.getElementById('checkbox')
+        if ( checkbox.checked){
+            myForm.submit()
+        }
+        else{
+            alert('Checkbox not checked')
+        }
+    }
+</script>
 </html>

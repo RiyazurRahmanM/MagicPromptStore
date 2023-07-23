@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0px;
+        }
+        body{
+            background-color: #1d1d29;
+        }
+        .link{
+            text-decoration: none;
+            color:white;
+            font-size: larger;
+            text-shadow: 3px 3px 2px black;
+        }
+        .header{
+            display: flex;
+            background-color: #242536;
+            height:170px;
+            padding-top: 30px;
+            justify-content:end;
+            align-items: end;
+            gap:30px;
+            flex-wrap: wrap;
+        }
+
+        .logo{
+            position: absolute;
+            left:10px;
+            top :10px;
+
+        }
+
+        .mps{
+            position: absolute;
+            left:90px;
+            top :20px;
+            color: gold;
+        }
+
+        .note{
+            font-size: larger;
+            color: white;
+        }
+
+        .agree-label{
+            color:rgb(156, 156, 247);
+            position: relative;
+            left:30px;
+            top:10px;
+        }
+        .agree-checkbox{
+            position: relative;
+            left:20px;
+            top:10px;
+            transform: scale(1.7);
+        }
+
+        .proceed{
+            position: relative;
+            left: 50px;
+            top:30px;
+            transform: scale(1.3);
+        }
+
+        .terms{
+            color: rgb(156, 156, 247);
+        }
+
+        .container{
+            display: flex;
+            position: relative;
+            top:10%;
+
+        }
+    </style>
+</head>
+<body>
+    {% load static %}
+
+    <img src="{% static 'logo.png' %}" width="70px" height="70px" class="logo">
+    <div class="mps">
+        <h1>MagicPromptStore</h1>
+        {%if name%}
+        Welcome Back 
+        {{name}}
+        {% endif %}
+    </div>
+    <div class="header">
+        <a href="{% url 'login_view' %}" class="link">login</a>
+        <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'post_view'%}" class="link">Post</a>
+        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
+        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+    </div>
+    <div class="container">
+        <form method="POST" id="myForm">
+            {% csrf_token %}
+            <div class="note">
+                <span class="terms">Terms and Condition:</span><br>
+                Your Prompt will be delivered within few minutes after Uploading payment screenshot. Prompt will be delivered to your account if and only if payment is valid. <br>Incase if your prompt is not delivered within 24 hours. You can complaint here. If your complaint is valid and fault is from company side we will free all the prompts for your account. Remember that, No Refund of amount will be provided in any situation.
+                <br><input type="checkbox" id="agree" value="true" class="agree-checkbox"><span class="agree-label">I agree to all the Terms and Condition</span>
+                <br><button type="button" onclick="submitFunction()" class="proceed">Proceed Payment</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    function submitFunction(){
+        myForm = document.getElementById('myForm')
+        // Assuming you have a checkbox element with the id "myCheckbox"
+        var checkbox = document.getElementById("agree");
+
+        // Checking if the checkbox is checked
+        if (checkbox.checked) {
+            myForm.submit();
+        } 
+        else {
+            alert("Checkbox is not checked");
+        }
+
+    }
+</script>
+</html>

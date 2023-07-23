@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-a9a(p@fgx)i*-nsq#sa^*w$p@+y11vz&w2atntj4k&j^d-wdd5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['magicpromptstore.pythonanywhere.com']
+ALLOWED_HOSTS = ['magicpromptstore.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -125,3 +126,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#Email :
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'devriyaz29@gmail.com'
+EMAIL_HOST_PASSWORD = 'bcgjmyayyvrqafcc'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -86,6 +86,10 @@
         <img src="{% static 'logo.png' %}" width="70px" height="70px" class="logo">
         <div class="mps">
             <h1>MagicPromptStore</h1>
+            {%if name%}
+            Welcome Back 
+            {{name}}
+            {% endif %}
         </div>
         <div class="header">
             <a href="{% url 'login_view' %}" class="link">login</a>
@@ -97,7 +101,11 @@
     </header>
 
     <main>
-        <h1>Login</h1>
+        <h1>Login
+            {% if message %}
+            {{ message }}
+            {% endif %}
+        </h1>
 
         {% if error %}
         <p style="text-align: center; color:red;">{{ error }}</p>

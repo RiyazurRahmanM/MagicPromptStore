@@ -108,12 +108,34 @@
             position: relative;
             left: 30%;
         }
+        .sticky{
+            padding: 0px;
+            background: burlywood;
+            border-radius: 10px;
+            width: 140px;
+            height: 30px;
+            font-size: medium;
+            position:fixed;
+            right: 0%;
+            top: 0%;
+        }
+        .link2{
+            text-decoration: none;
+            color:black;
+            font-size: larger;
+            text-shadow: 2px 2px 3px black;
+            margin: 0px;
+        }
     </style>
 </head>
 <body>
     <img src="{% static 'logo.png' %}" width="70px" height="70px" class="logo">
     <div class="mps">
         <h1>MagicPromptStore</h1>
+        {%if name%}
+        Welcome Back
+        {{name}}
+        {% endif %}
     </div>
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
@@ -141,7 +163,7 @@
             {% endfor %}
         </div>
     </div>
-
+    <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
     <script>
         function onSubmit(title){
             var myform = document.getElementById('myform');
