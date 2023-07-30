@@ -126,6 +126,17 @@
             text-shadow: 2px 2px 3px black;
             margin: 0px;
         }
+        .sticky2{
+            padding: 0px;
+            background: burlywood;
+            border-radius: 10px;
+            width: 180px;
+            height: 30px;
+            font-size: medium;
+            position:fixed;
+            right: 0%;
+            top: 5%;
+        }
     </style>
 </head>
 <body>
@@ -140,10 +151,18 @@
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
         <a href="{% url 'signup_view' %}" class="link">signup</a>
-        <a href="{% url 'post_view' %}" class="link">Post</a>
+        <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
         <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
-        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+        <a href="{% url 'post_view' %}" class="link">Post</a>
     </div>
+
+    {% if message %}
+    <div class = "message" style = "
+    color : white;
+    ">
+    <h3>{{ message}}</h3>
+    </div>
+    {% endif %}
 
     <div class="grid">
         <div class="container">
@@ -164,6 +183,7 @@
         </div>
     </div>
     <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
+    <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
     <script>
         function onSubmit(title){
             var myform = document.getElementById('myform');

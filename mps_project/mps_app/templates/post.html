@@ -8,6 +8,17 @@
         *{
         margin:0px;
     }
+    .sticky2{
+        padding: 0px;
+        background: burlywood;
+        border-radius: 10px;
+        width: 180px;
+        height: 30px;
+        font-size: medium;
+        position:fixed;
+        right: 0%;
+        top: 5%;
+    }
     body{
         background-color: #1d1d29;
     }
@@ -100,7 +111,7 @@
 </head>
 <body>
     {% load static %}
-
+    
     <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
     <div class="mps">
         <h1>MagicPromptStore</h1>
@@ -112,8 +123,9 @@
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
         <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
         <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
-        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+        <a href="{% url 'post_view' %}" class="link">Post</a>
     </div>
     <h1>
         How Sellers program work?
@@ -163,7 +175,8 @@
                 </form>
             </div>
         </div>
-</body>
+        <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
+    </body>
 <script>
     function submitFunction(){
         myForm = document.getElementById('myForm')

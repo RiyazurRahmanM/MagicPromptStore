@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Prompts , Users, Payment, Delivery
+from .models import Prompts , Users, Payment, Delivery, Withdraw, Pay
 from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -20,6 +20,11 @@ from dotenv import load_dotenv
 def home_view(request):
     request.session.flush()
     request.session['current'] = 'home'
+    request.session['affiliate'] = "null"
+    affiliate = request.GET.get('affiliate',None)
+    if affiliate is not None:
+        theaffiliate = affiliate
+        request.session['affiliate'] = theaffiliate
     prompts = Prompts.objects.all()
     context = {
         'prompts' : prompts,
@@ -47,7 +52,13 @@ def login_view(request):
                 elif request.session.get('current') == 'buy':
                     return redirect(reverse('prompt_view'))
                 elif request.session.get('current') == 'browse':
-                    return redirect(reverse('prompt_view'))
+                    return redirect(reverse('store_view'))
+                elif request.session.get('current') == 'posted':
+                    return redirect(reverse('posted_view'))
+                elif request.session.get('current') == 'my_prompts':
+                    return redirect(reverse('my_prompts_view'))
+                elif request.session.get('current') == 'affiliate':
+                    return redirect(reverse('affiliate_view'))
                     
             else :
                 context = {
@@ -82,6 +93,19 @@ def login_view(request):
         context ={
             'message' : 'to view the details of the Prompt',
         }
+    if request.session.get('current')=='my_prompts':
+        context ={
+            'message' : 'to view the details of the Prompt',
+        }
+
+    if request.session.get('current') == 'posted':
+        context = {
+            'message' : 'to view the details of the Prompt',
+        }
+    if request.session.get('current') == 'affiliate':
+        context = {
+            'message' : 'to become an affiliate',
+        }
     if request.session.get('user')!= 'null':
         context['name'] = request.session.get('email')
     return render(request,'login.html',context)
@@ -106,6 +130,10 @@ def signup_view(request):
             user.name = name 
             user.email = email
             user.password = password
+            if request.session.get('affiliate') != "null":
+                affiliate = request.session.get('affiliate')
+                theaffiliate = Users.objects.get(email=affiliate)
+                user.from_affiliate = theaffiliate
             user.save()
             request.session['email'] = email
             request.session['user'] = 'logged'
@@ -117,7 +145,12 @@ def signup_view(request):
                 return redirect(reverse('prompt_view'))
             elif request.session.get('current') == 'browse':
                 return redirect(reverse('prompt_view'))
-
+            elif request.session.get('current') == 'posted':
+                    return redirect(reverse('prompt_view'))
+            elif request.session.get('current') == 'my_prompts':
+                    return redirect(reverse('prompt_view'))
+            elif request.session.get('current') == 'affiliate':
+                return redirect(reverse('affiliate_view'))
             return redirect(reverse('store_view'))
     context = {
 
@@ -127,7 +160,6 @@ def signup_view(request):
     return render(request,'signup.html',context)
 
 def store_view(request):
-
     if request.method == 'POST':
 
         title = request.POST.get('thetitle')
@@ -139,6 +171,9 @@ def store_view(request):
     context = {
         'prompts' : prompts
     }
+    if request.session.get('current') == 'post':
+        context['message'] = 'Your Prompt is successfully posted in the store'
+
     if request.session.get('user')!= 'null':
         context['name'] = request.session.get('email')
     return render(request,'store.html',context)
@@ -229,7 +264,14 @@ def post_form_view(request):
         prompt.sample_input = sample_input
         prompt.sample_output = sample_output
 
+        theuser = request.session.get('email')
+        user = Users.objects.get(email=theuser)
+
+        prompt.user = user
         prompt.save()
+        user.posted.add ( prompt)
+        user.save()
+        return redirect(reverse('store_view'))
     context = {
     
     }
@@ -242,6 +284,10 @@ def prompt_view(request):
     request.session['current'] = 'browse'
     if request.session.get('user')== 'null':
         return redirect(reverse('login_view'))
+    
+    elif request.session.get == 'posted':
+        return redirect(reverse('seeprompt_view'))
+    
     elif request.session.get('user') != 'null':
         request.session['current'] = 'buy'
         user = request.session.get('email')
@@ -301,6 +347,10 @@ def seeprompt_view(request):
     return render(request,'seeprompt.html',context)
 
 def my_prompts_view(request):
+
+    request.session['current'] = 'my_prompts'
+    if request.session.get('user')== 'null':
+        return redirect(reverse('login_view'))
     if request.method == 'POST':
         title = request.POST.get('thetitle')
         request.session['thetitle'] = title
@@ -313,6 +363,29 @@ def my_prompts_view(request):
     if request.session.get('user')!= 'null':
         context['name'] = request.session.get('email')
     return render(request,'my_prompts.html',context)
+
+
+def posted_view(request):
+
+    request.session['current'] = 'posted'
+    if request.session.get('user')== 'null':
+        return redirect(reverse('login_view'))
+    if request.method == 'POST':
+        title = request.POST.get('thetitle')
+        request.session['thetitle'] = title
+        return redirect(reverse('prompt_view'))
+    email = request.session.get('email') 
+    user = Users.objects.get(email=email)
+    context = {
+        'user' : user,
+    }
+
+    if user.is_affiliate == "yes":
+        context['link'] = user.link
+    if request.session.get('user')!= 'null':
+        context['name'] = request.session.get('email')
+    return render(request,'posted.html',context)
+
 
 def delivery_view(request):
     if request.method=="POST":
@@ -346,7 +419,22 @@ def delivery_form_view(request):
         payment.delivery = "Delivered"
         payment.save()
         print(payment.delivery)
+
+
         theuser.save()
+
+        theprompt.sales = theprompt.sales + 1
+
+        if theuser.from_affiliate is not None:
+            affiliate = Users.objects.get(email = theuser.from_affiliate.email)
+            affiliate.total_earned = (25/100) * theprompt.cost
+
+        seller = theprompt.user.email
+        theseller = Users.objects.get(email=seller)
+
+        theseller.total_earned = (75/100) * theprompt.cost
+        theseller.save()
+        theprompt.save()
     if request.session.get('user')!= 'null':
         context['name'] = request.session.get('email')
 
@@ -357,3 +445,85 @@ def delivery_form_view(request):
 
     return render(request,'delivery_form.html',context)
 
+def withdraw_view(request):
+    if request.method == "POST":
+        user = request.session.get('email')
+        image = request.FILES.get('image')
+        amount = request.POST.get('amount')
+        withdraw = Withdraw()
+        withdraw.image = image
+        withdraw.amount = amount
+        theuser = Users.objects.get(email= user)
+        withdraw.user = theuser
+        withdraw.save()
+
+    user = request.session.get('email')
+    theuser = Users.objects.get(email = user)
+    context = {
+        'total_amount' : theuser.total_earned,
+    }
+    return render(request,'withdraw.html',context)
+
+def pay_view(request):
+    if request.method=="POST":
+            p = Delivery.objects.get(id=1)
+            if request.POST.get('p') == p.p:
+                return redirect(reverse('pay_form_view'))
+    context = {
+    
+    }
+    if request.session.get('user')!= 'null':
+        context['name'] = request.session.get('email')
+    return render(request,'pay.html',context)
+
+def pay_form_view(request):
+    
+    withdraws = Withdraw.objects.all()
+    context = {
+        'withdraws' : withdraws,
+    }
+
+    if request.method == "POST":
+        user = request.POST.get('email')
+        theuser = Users.objects.get(email=user)
+        amount = request.POST.get('amount')
+        amount = int(amount)
+        theuser.total_earned = theuser.total_earned - amount
+        theuser.save()
+        withdraw = Withdraw.objects.get(user = theuser)
+        withdraw.pay = "Paid"
+        withdraw.save()
+
+    if request.session.get('user')!= 'null':
+        context['name'] = request.session.get('email')
+
+    withdraws = Withdraw.objects.all()
+    context = {
+        'withdraws' : withdraws
+    }
+
+    return render(request,'pay_form.html',context)
+
+def affiliate_view(request):
+    request.session['current'] = "affiliate"
+    if request.session.get('user')== 'null':
+        context = {
+            'notlogged' :'notlogged',
+        }
+        if request.method == "POST" and request.session.get('user')== 'null':
+            return redirect(reverse('login_view'))
+        return render(request,'affiliate.html',context)
+    if request.session.get('user')!= 'null': 
+        email = request.session.get('email')
+        user = Users.objects.get(email=email)
+        if user.is_affiliate == "no":
+            user = Users.objects.get(email = email)
+            user.is_affiliate = "yes"
+            link = "magicpromptstore.pythonanywhere.com/?affiliate=" + request.session.get('email')
+            user.link = link
+            user.save()
+            return redirect(reverse('posted_view'))
+        
+        if user.is_affiliate == "yes":
+            return redirect(reverse('posted_view'))
+    

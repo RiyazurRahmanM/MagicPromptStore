@@ -1,11 +1,14 @@
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MagicPromptStore</title>
     <style>
         *{
-            margin:0px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         .sticky2{
             padding: 0px;
@@ -18,15 +21,17 @@
             right: 0%;
             top: 5%;
         }
-        body{
+        body {
             background-color: #1d1d29;
         }
-        .link{
+        
+        .link {
             text-decoration: none;
-            color:white;
+            color: white;
             font-size: larger;
             text-shadow: 3px 3px 2px black;
         }
+        
         .header{
             display: flex;
             background-color: #242536;
@@ -38,22 +43,29 @@
             flex-wrap: wrap;
         }
 
-        .logo{
+        .logo {
             position: absolute;
-            left:10px;
-            top :10px;
-
+            left: 10px;
+            top: 10px;
         }
 
-        .mps{
+        .mps {
             position: absolute;
-            left:90px;
-            top :20px;
+            left: 90px;
+            top: 20px;
             color: gold;
         }
+        
         .grid {
-            display: flex;
-            flex-wrap: wrap;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .container {
+            position: relative;
+            left: 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         }
         
         .card {
@@ -97,43 +109,44 @@
             font-size: 19px;
             color: gold;
         }
-
-        .sample{
+        
+        .price {
+            border-radius: 30px;
+            background-color: #FF4500;
+            text-align: center;
+            margin: 10px;
+            width: 60px;
             position: relative;
-            top:20px;
-            width: 800px;
+            left: 30%;
         }
-        .sample_input{
-            background-color: #AC39DC;
-            color: #1d1d29;
-            font-size: larger;
-        }
-        .sample_output{
-            background-color: #470B60;
-            color: gold;
-            font-size: larger;
-        }
-        .prompt{
-            background-color: #250135;
-            color: gold;
-            font-size: larger;
-        }
-        .buy_button{
-            position: relative;
-            top: 10px;
-            left: 10px;
-            background-color: wheat;
-            color:#1d1d29;
-            font-size: larger;
+        .sticky{
+            padding: 0px;
+            background: burlywood;
             border-radius: 10px;
+            width: 140px;
+            height: 30px;
+            font-size: medium;
+            position:fixed;
+            right: 0%;
+            top: 0%;
+        }
+        .link2{
+            color:black;
+            font-size: larger;
+            text-shadow: 2px 2px 3px black;
+            margin: 0px;
+        }
+        button{
+            background: linear-gradient(to right bottom,violet,gold);
+            border-radius: 10px;
+            width: 100px;
+            height: 50px;
+            font-size: large;
         }
     </style>
 </head>
-
 <body>
-    {% load static %}
-
-    <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
+    <img src="{% static 'logo.png' %}" width="70px" height="70px" class="logo">
     <div class="mps">
         <h1>MagicPromptStore</h1>
         {%if name%}
@@ -147,38 +160,44 @@
         <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
         <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
         <a href="{% url 'post_view' %}" class="link">Post</a>
-    </div>
-
-
+    </div >
+    <p style="color:white">Total Earned : <span style="color:gold">{{ user.total_earned }}</span><br></p>
+    <button><a class="link2" href="{% url 'withdraw_view' %}">Withdraw</a></button>
+    {% if link %}
+    <p style="color:white">You are an affiliate as well. Your affiliate link:</p>     <h1 style="color:gold;">
+        {% if link%}
+        {{ link }}
+        {% endif %}
+    </h1>
+    {% endif %}
     <div class="grid">
         <div class="container">
-                <div class="card">
+            {% if user%}
+            {% for prompt in user.posted.all %}
+                <div class="card" onclick="onSubmit('{{ prompt.title }}')">
+                    <form method="POST" id="myform">
+                        {% csrf_token %}
+                        <input type="hidden" value="" name="thetitle">
                         <div class="title">
                             {{ prompt.title }}
                         </div>
                         <div class="description">
                             {{ prompt.description }}
                         </div>
+                    </form>
                 </div>
-            </div>
-            <div class="sample">
-
-                <div class="sample_input">
-                    Lorem ipsum dolor sit amet. {{prompt.sample_input}}
-                </div>
-                <div class="sample_output">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ducimus pariatur eligendi, atque laudantium cumque quaerat reprehenderit. Assumenda, tempore? Consectetur itaque corrupti voluptas tempora ullam maiores nulla labore magni eos numquam, rem delectus accusantium quod enim vel sit? Qui id nulla commodi possimus aliquid recusandae, placeat fugiat veniam accusamus dolore ipsum molestiae suscipit odio, facilis libero reiciendis error distinctio voluptatum. Excepturi eveniet mollitia ut quidem perspiciatis nostrum, impedit placeat facere a.{{ prompt.sample_output }}
-                </div>
-                <div>
-                    {{ prompt.sales }} Sales
-                </div>
-                <div class="prompt">
-                    {{ prompt.prompt }}
-                </div>
-            </div>
+            {% endfor %}
+            {% endif %}
         </div>
-    </form>
+    </div>
+    <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
     <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
+    <script>
+        function onSubmit(title){
+            var myform = document.getElementById('myform');
+            myform.elements['thetitle'].value = title;
+            myform.submit();
+        }
+    </script>
 </body>
-
 </html>

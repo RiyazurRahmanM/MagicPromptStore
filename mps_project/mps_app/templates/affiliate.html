@@ -20,6 +20,9 @@
         }
         body{
             background-color: #1d1d29;
+            background-color: #1d1d29;
+            color: white;
+            font-family: 'Times New Roman', Times, serif;
         }
         .link{
             text-decoration: none;
@@ -73,9 +76,10 @@
         button{
             background: linear-gradient(to right bottom,violet,gold);
             border-radius: 10px;
-            width: 200px;
+            width: 300px;
             height: 50px;
             font-size: large;
+            
         }
         .sticky{
             padding: 0px;
@@ -140,7 +144,32 @@
             -webkit-background-clip: text; /* For Safari/Chrome */
             color: transparent;
         }
-          
+        .direct{
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .affiliate{
+            display:flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .checkbox{
+            margin-top: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            transform: scale(2);
+        }
+
+        .bottom{
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -158,60 +187,51 @@
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
         <a href="{% url 'signup_view' %}" class="link">signup</a>
-        <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
-        <a href="{% url 'store_view' %}" class="link">Browse</a>
+        <a href="{% url 'affiliate_view'%}" class="link">Become an Affiliate</a>
+        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
         <a href="{% url 'post_view' %}" class="link">Post</a>
     </div>
-
-    <div class="container">
-
-        <h2 class="slogan">
-            Find the best prompts for ChatGPT to make your life Productive and Efficient.
-        </h2>
-        <div class="button-container">
-            <button><a href="{% url 'store_view' %}" class="link3">Browse Prompts</a></button>
-            <button><a href="{% url 'post_view' %}" class="link3">Post a Prompt</a></button>
-        </div>
-        <div class="top-prompts-container">
+    <h1>
+        How sellers and affiliates program work?
+    </h1>
+    {% if notlogged %}
+    <form method="POST" id="myForm" style="display:flex; justify-content:center; margin-top:10px;">
+        {% csrf_token %}
+        <button type="button" onclick="submitFunction()" >Become an Affiliate or Login to the Dashboard</button>
+    </form>
+    {% endif %}
+    <div class="direct">
+        <h3>
+            If a direct user buys your prompt you will get 75% of the money he paid and 25% 
+            will be taken by MagicPromptStore Company as Marketplace commision for 
+            Developemt of Marketplace, Maintainence, Hosting, advertising etc.
+        </h3>
     
-            <h4 class="notes2">
-                Normal Prompts just results generic outputs<br>
-                Use the Engineered prompts from MagicPromptStore to<br>
-                unlock 100% capablity of ChatGPT<br>
-            </h4>
-            <div class="top-prompts">
-                Top Prompts
-                {% for prompt in prompts|slice:"0:5" %}
-                    <h1>{{prompt.title}}</h1>
-                {% endfor %}
-            </div>
-            <div class="sep">
-                <div class="question">
-                    What is MagicPromptStore?
-                </div>
-    
-                <div class="answer">
-    
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Welcome to MagicPromptStore, the ultimate destination for unlocking the true capabilities of Chat GPT! As a web app designed to enhance your Chat GPT experience, we offer a wide range of carefully curated prompts that will elevate your conversations to a whole new level.
-    
-    With our extensive collection of prompts, you can explore various categories such as writing prompts, journal prompts, creative prompts, and more. Whether you're a writer, a student, a marketer, or simply someone looking to engage in captivating conversations, MagicPromptStore has the perfect prompt for you.<br><br>
-    
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our platform provides you with the opportunity to browse through thousands of meticulously crafted prompts that have been optimized for SEO. These prompts are designed to spark your creativity, ignite thought-provoking discussions, and unleash the full potential of Chat GPT.
-    
-    At MagicPromptStore, we understand the importance of quality content and user satisfaction. That's why we prioritize offering the best Chat GPT prompts available. Our team of experts continually updates and refreshes our prompt library to ensure that you always have access to the latest and most engaging content.<br><br>
-    
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether you're searching for prompts to enhance your writing skills, ignite your imagination, or explore new topics, our user-friendly interface makes it easy to find exactly what you need. You can navigate through different categories, search for specific keywords, or even filter prompts based on your preferences.
-    
-    Join our vibrant community of prompt enthusiasts today and unlock the true potential of Chat GPT. Sign up for a free account and start exploring the vast world of prompts that will inspire, challenge, and captivate both you and your AI companion.
-    
-    At MagicPromptStore, we believe that the right prompt has the power to unlock extraordinary conversations. Discover the magic of prompts today and revolutionize your Chat GPT experience.<br>
-                </div>
-        </div>
-
-        </div>
+        <img src="{% static 'direct.png' %}" width="500px" height="300px">
     </div>
 
-        <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
-        <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
+    <div class="affiliate">
+        <h3>If the user has signed to the MagicPromptStore because of an affiliate and buys your prompt
+            You will get 75% of the money he paid and 5% will be taken by MagicPromptStore Company
+            as Marketplace commision for Devlopement of Marketplace Maintainence, Hosting, 
+            advertising etc. Remaining 20% will be given to Affiliate.
+        </h3>
+    
+        <img src="{% static 'affiliate.png' %}" width="500px" height="300px">
+    </div>
+
+    {% if affiliate%}
+    <form method="POST" id="myForm" style="display:flex; justify-content:center; margin-top:10px;">
+        {% csrf_token %}
+            <button type="button" onclick="submitFunction()">Become an Affiliate </button>
+    </form>
+    {% endif %}
+
 </body>
+<script>
+    function submitFunction(){
+        myForm = document.getElementById('myForm')
+        myForm.submit()
+    }
+</script>
 </html>

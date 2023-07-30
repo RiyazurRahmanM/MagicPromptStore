@@ -1,10 +1,16 @@
-{% load static %}
+{% load static%}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Login</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         .sticky2{
             padding: 0px;
             background: burlywood;
@@ -16,19 +22,6 @@
             right: 0%;
             top: 5%;
         }
-        .link{
-            text-decoration: none;
-            color:white;
-            font-size: larger;
-            text-shadow: 3px 3px 2px black;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             background-color: #1d1d29;
             color: white;
@@ -75,7 +68,6 @@
             padding: 5px;
         }
 
-        input[type="text"],
         input[type="email"],
         input[type="password"] {
             border-radius: 5px;
@@ -90,6 +82,12 @@
             height: 50px;
             font-size: large;
             color: white;
+        }
+        .link{
+            text-decoration: none;
+            color:white;
+            font-size: larger;
+            text-shadow: 3px 3px 2px black;
         }
     </style>
 </head>
@@ -113,30 +111,37 @@
     </header>
 
     <main>
-        <h1>Sign Up</h1>
-        {% if error %}
-        <p style="text-align: center; color:red;">{{ error }}</p>
-        {% endif %}
-
-        <form method="POST">
+        <form method="POST" id="myForm" enctype="multipart/form-data">
             {% csrf_token %}
-            <table>
-                <tr>
-                    <td><label for="name">Name:</label></td>
-                    <td><input type="text" id="name" name="name"></td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email:</label></td>
-                    <td><input type="email" id="email" name="email"></td>
-                </tr>
-                <tr>
-                    <td><label for="password">Create Password:</label></td>
-                    <td><input type="password" id="password" name="password"></td>
-                </tr>
-            </table>
-            <button type="submit">Submit</button>
+            Enter the Amount to withdraw:<input id="amount" class="amount" name="amount" type="number"><br>
+            <input type="file" name="image" id="file"><br>Upload your UPI QR code screenshot 
+            <button onclick="submitFunction('{{ total_amount }}')" type="button">Submit</button>
         </form>
-        <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
+    </body>
+    <script>
+        function submitFunction(total_amount){
+            var myForm = document.getElementById('myForm');
+            amount = myForm.elements['amount'].value
+            const image = document.getElementById('file')
+            const file = image.files[0]
+            if(amount>total_amount){
+                alert('Please enter an amount equal to or below the balance amount '+total_amount)
+            }
+    
+            else if (amount<0){
+                alert("Enter an amount")
+            }
+            else{
+                if(!file){
+                    alert('Please upload a image')
+                }
+                myForm.submit();
+            }
+        }
+    </script>
     </main>
+    <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
 </body>
 </html>
+
+

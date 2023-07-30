@@ -82,6 +82,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'MagicPromptStore$mps_db',         # Replace 'your_database_name' with your MySQL database name
+#         'USER': 'MagicPromptStore',        # Replace 'your_mysql_username' with your MySQL username
+#         'PASSWORD': 'India+29',    # Replace 'your_mysql_password' with your MySQL password
+#         'HOST': 'MagicPromptStore.mysql.pythonanywhere-services.com',                  # Replace 'localhost' with your MySQL host
+#         'PORT': '3306',                           # Leave it empty to use the default MySQL port (usually 3306)
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

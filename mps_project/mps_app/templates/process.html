@@ -7,6 +7,17 @@
         *{
             margin:0px;
         }
+        .sticky2{
+            padding: 0px;
+            background: burlywood;
+            border-radius: 10px;
+            width: 180px;
+            height: 30px;
+            font-size: medium;
+            position:fixed;
+            right: 0%;
+            top: 5%;
+        }
         body{
             background-color: #1d1d29;
         }
@@ -136,9 +147,9 @@
     <div class="header">
         <a href="{% url 'login_view' %}" class="link">login</a>
         <a href="{% url 'signup_view' %}" class="link">signup</a>
-        <a href="{% url 'post_view'%}" class="link">Post</a>
+        <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
         <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
-        <a href="{% url 'post_view' %}" class="link">Post a Prompt</a>
+        <a href="{% url 'post_view' %}" class="link">Post</a>
     </div>
 
 
@@ -150,6 +161,9 @@
                         </div>
                         <div class="description">
                             {{ prompt.description }}
+                        </div>
+                        <div>
+                            {{ prompt.sales }} Sales
                         </div>
                 </div>
             </div>

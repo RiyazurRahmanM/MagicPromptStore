@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <th>
+            <tr>
+                <td>User</td>
+                <td>Prompt</td>
+                <td>Screenshot</td>
+            </tr>
+        </th>
+        {% if withdraws %}
+    {% for withdraw in withdraws %}
+        <tr>
+            <td>
+                {{ withdraw.user.email }}
+            </td>
+            <td>
+                {{ withdraw.amount }}
+            </td>
+            <td>
+                <img src="{{ withdraw.image.url }}" width="1000px" height="500px">
+            </td>
+            <td>
+                {{ withdraw.pay }}
+            </td>
+            <td>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ withdraw.user.email }}" name="email">
+                    <input type="hidden" value="{{ withdraw.amount }}" name="amount">
+                    {% if withdraw.pay == "Not Paid" %}
+                        <button type="submit" name="action" value="deliver">Pay</button>
+                    {% endif %}
+                    {% if withdraw.pay == "Paid" %}
+                        Paid
+                    {% endif %}
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+{% endif %}
+</table>
+</body>
+
+<script>
+    function submitFunction(this){
+        const myform = buttonElement.closest('form');
+        myform.submit();
+    }
+</script>
+</html>
