@@ -21,5 +21,6 @@ urlpatterns = [
     path('withdraw/',views.withdraw_view,name="withdraw_view"),
     path('pay/',views.pay_view,name="pay_view"),
     path('pay_form/',views.pay_form_view,name="pay_form_view"),
-    path('affiliate/',views.affiliate_view,name="affiliate_view")
+    path('affiliate/',views.affiliate_view,name="affiliate_view"),
+    path('payment_setup/',views.payment_setup_view,name="payment_setup_view"),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -28,6 +28,8 @@ class Users(models.Model):
     is_affiliate = models.TextField(default = "no")
     link = models.TextField(default = "null")
     from_affiliate = models.ForeignKey('Users',blank=True,null=True,on_delete=models.SET_NULL)
+    payment_id = models.TextField(max_length=50,default="null")
+    withdraw_processing = models.TextField(default='no')
 
 class Payment(models.Model):
     image = models.ImageField(upload_to="images/")
@@ -40,7 +42,7 @@ class Delivery(models.Model):
 
 class Withdraw(models.Model):
     user = models.ForeignKey(Users,blank=True,null=True,on_delete=models.SET_NULL)
-    image = models.ImageField(upload_to="images/")
+    payment_id = models.TextField(max_length=50,default="null")
     pay = models.TextField(default="Not Paid")
     amount = models.IntegerField(default=0)
 

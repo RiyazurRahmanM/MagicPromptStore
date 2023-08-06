@@ -162,7 +162,12 @@
         <a href="{% url 'post_view' %}" class="link">Post</a>
     </div >
     <p style="color:white">Total Earned : <span style="color:gold">{{ user.total_earned }}</span><br></p>
-    <button><a class="link2" href="{% url 'withdraw_view' %}">Withdraw</a></button>
+    {% if user.withdraw_processing == "no" %}
+        <button><a class="link2" href="{% url 'withdraw_view' %}">Withdraw</a></button>
+    {% endif %}
+    {% if user.withdraw_processing == "yes" %}
+        <p style="color: white;">Your Withdraw is in process</p>
+    {% endif %}
     {% if link %}
     <p style="color:white">You are an affiliate as well. Your affiliate link:</p>     <h1 style="color:gold;">
         {% if link%}

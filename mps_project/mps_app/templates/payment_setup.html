@@ -111,31 +111,33 @@
     </header>
 
     <main>
-        <form method="POST" id="myForm" enctype="multipart/form-data">
-            {% csrf_token %}
-            Enter the Amount to withdraw:<input id="amount" class="amount" name="amount" type="number"><br>
-            <button onclick="submitFunction('{{ total_amount }}')" type="button">Submit</button>
-        </form>
-    </body>
-    <script>
-        function submitFunction(total_amount){
-            var myForm = document.getElementById('myForm');
-            amount = myForm.elements['amount'].value
-            if(amount>total_amount){
-                alert('Please enter an amount equal to or below the balance amount '+total_amount)
-            }
-    
-            else if (amount<0){
-                alert("Enter an amount")
-            }
-            else{
-                myForm.submit();
-            }
-        }
-    </script>
+        <h1>Login
+            {% if message %}
+            {{ message }}
+            {% endif %}
+        </h1>
+
+        {% if error %}
+        <p style="text-align: center; color:red;">{{ error }}</p>
+        {% endif %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td><label for="upi_id">Enter your UPI id:</label></td>
+            <td><input type="text" id="upi_id" name="upi_id"><b> or</b></td>
+        </tr>
+        <tr>
+            <td><label for="paypal_id">Enter your Paypal_id:</label></td>
+            <td><input type="text" id="paypal_id" name="paypal_id"></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
     </main>
     <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
 </body>
 </html>
-
 

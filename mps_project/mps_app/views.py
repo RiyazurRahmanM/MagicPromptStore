@@ -277,6 +277,9 @@ def post_form_view(request):
     }
     if request.session.get('user')!= 'null':
         context['name'] = request.session.get('email')
+    user = Users.objects.get(email = request.session.get('email'))
+    if user.payment_id == "null":
+        return redirect(reverse('payment_setup_view'))
     return render(request,'post_form.html',context)
 
 
@@ -448,20 +451,23 @@ def delivery_form_view(request):
 def withdraw_view(request):
     if request.method == "POST":
         user = request.session.get('email')
-        image = request.FILES.get('image')
         amount = request.POST.get('amount')
         withdraw = Withdraw()
-        withdraw.image = image
         withdraw.amount = amount
         theuser = Users.objects.get(email= user)
         withdraw.user = theuser
+        theuser.withdraw_processing = "yes"
+        theuser.save()
         withdraw.save()
 
+        
     user = request.session.get('email')
     theuser = Users.objects.get(email = user)
+        
     context = {
         'total_amount' : theuser.total_earned,
     }
+
     return render(request,'withdraw.html',context)
 
 def pay_view(request):
@@ -489,6 +495,7 @@ def pay_form_view(request):
         amount = request.POST.get('amount')
         amount = int(amount)
         theuser.total_earned = theuser.total_earned - amount
+        theuser.withdraw_processing="no"
         theuser.save()
         withdraw = Withdraw.objects.get(user = theuser)
         withdraw.pay = "Paid"
@@ -526,4 +533,31 @@ def affiliate_view(request):
         
         if user.is_affiliate == "yes":
             return redirect(reverse('posted_view'))
-    
+
+
+def payment_setup_view(request):
+    if request.method == "POST":
+        upi_id = request.POST.get('upi_id','')
+        paypal_id = request.POST.get('paypal_id','')
+        if upi_id=='' and paypal_id =='':
+            context = {
+                'error':'Enter atleast one payment id',
+            }
+            return render(request,'payment_setup.html',context)
+        if upi_id!='' and paypal_id !='':
+            context = {
+                'error' : 'Enter only any one payment id',
+            }
+            return render(request,'payment_setup.html',context)
+        
+        if upi_id!='' and paypal_id == '':
+            user = Users.objects.get(email = request.session.get('email'))
+            user.payment_id = upi_id
+            user.save()
+            return redirect(reverse('post_form_view'))
+        if upi_id=='' and paypal_id != '':
+            user = Users.objects.get(email = request.session.get('email'))
+            user.payment_id = paypal_id
+            user.save()
+            return redirect(reverse('post_form_view'))
+    return render(request,'payment_setup.html')
