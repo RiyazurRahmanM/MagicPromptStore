@@ -14,7 +14,6 @@
             width: 180px;
             height: 30px;
             font-size: medium;
-            position:fixed;
             right: 0%;
             top: 5%;
         }
@@ -84,7 +83,7 @@
             width: 140px;
             height: 30px;
             font-size: medium;
-            position:fixed;
+
             right: 0%;
             top: 0%;
         }
@@ -161,6 +160,8 @@
         <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
         <a href="{% url 'store_view' %}" class="link">Browse</a>
         <a href="{% url 'post_view' %}" class="link">Post</a>
+        <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
+        <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
     </div>
 
     <div class="container">
