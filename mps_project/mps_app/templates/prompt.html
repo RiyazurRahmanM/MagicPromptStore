@@ -107,11 +107,13 @@
             background-color: #AC39DC;
             color: #1d1d29;
             font-size: larger;
+            overflow-x: scroll;
         }
         .sample_output{
             background-color: #470B60;
             color: gold;
             font-size: larger;
+            overflow-x: scroll;
         }
 
         .buy_button{
@@ -160,12 +162,13 @@
             <div class="sample">
 
                 <div class="sample_input">
+
                     Sample Input: <br>{{prompt.sample_input}}<br>
-                    <br> Cost of the Prompt: {{ prompt.cost }}
+                    <br> Cost of the Prompt: <pre>{{ prompt.cost }}</pre>
                 </div>
                 <div class="sample_output">
                     Sample Output: <br>
-                    {{ prompt.sample_output }}
+                    <pre>{{ prompt.sample_output }}</pre>
                 </div>
                 <div>
                     {{ prompt.sales }} Sales
