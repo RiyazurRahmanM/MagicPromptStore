@@ -1,0 +1,103 @@
+
+*{
+    margin:0px;
+    padding: 0%;
+}
+.sticky2{
+    padding: 0px;
+    background: burlywood;
+    border-radius: 10px;
+    width: 180px;
+    height: 30px;
+    font-size: medium;
+    right: 0%;
+    top: 5%;
+}
+body{
+    background-color: #1d1d29;
+    margin:0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+.link{
+    text-decoration: none;
+    color:white;
+    font-size: larger;
+    text-shadow: 3px 3px 2px black;
+}
+.link2{
+    text-decoration: none;
+    color:black;
+    font-size: larger;
+    text-shadow: 2px 2px 3px black;
+    margin: 0px;
+}
+.link3{
+    
+    color:black;
+    font-size: x-large;
+    margin: 0px;
+}
+.header{
+    position: relative;
+    left:0px;
+    width: 100%;
+    display: flex;
+    background-color: #242536;
+    justify-content:flex-end;
+    align-items: end;
+    gap:30px;
+    flex-wrap: wrap;
+    margin-right: 0px;
+}
+
+.mine{
+    display: flex;
+    background-color: #242536;
+    height:50px;
+    padding-top: 30px;
+    justify-content:flex-end;
+    align-items: end;
+    gap:30px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.logo{
+    position: absolute;
+    left:10px;
+    top :10px;
+
+}
+
+.mps{
+    position: relative;
+    left:90px;
+    top :20px;
+    color: gold;
+    margin-bottom: 50px;
+}
+
+.notes2{
+    color:wheat;
+    font-size: 25px;
+}
+
+button{
+    background: linear-gradient(to right bottom,violet,gold);
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: large;
+}
+.sticky{
+    padding: 0px;
+    background: burlywood;
+    border-radius: 10px;
+    width: 140px;
+    height: 30px;
+    font-size: medium;
+
+    right: 0%;
+    top: 0%;
+}

@@ -1,0 +1,124 @@
+.notes2{
+    color:wheat;
+    font-size: 25px;
+}
+
+button{
+    background: linear-gradient(to right bottom,violet,gold);
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: large;
+}
+.sticky{
+    padding: 0px;
+    background: burlywood;
+    border-radius: 10px;
+    width: 140px;
+    height: 30px;
+    font-size: medium;
+
+    right: 0%;
+    top: 0%;
+}
+.slogan {
+    margin-top: 20px;
+    font-size: 30px;
+    color:violet;
+    animation: slogan-ani;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes slogan-ani{
+    0%{color:violet} 50%{color:gold} 100%{color:rgb(161, 32, 161)}
+}
+
+.button-container{
+    display:flex;
+    left:5%;
+    flex-wrap: wrap;
+    gap:20px;
+    margin-bottom: 20px;
+}
+
+.top-prompts{
+    width:500px;
+    height: 300px;
+    background-color: violet;
+    margin-left: 20px;
+}
+.top-prompts-container{
+    display:flex;
+    gap:20px;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.question{
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:x-large;
+}
+
+.answer{
+    margin-top:20px;
+    color:white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size:larger;
+    background-image: linear-gradient(to right bottom, violet, gold);
+    background-clip: text;
+    -webkit-background-clip: text; /* For Safari/Chrome */
+    color: transparent;
+}
+@keyframes moveBox1 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes moveBox2 {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.top-prompts {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Added for visibility in the example */
+    height: 100px; /* Added for visibility in the example */
+}
+
+.box1, .box2, .box3 {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    height: 100%;
+}
+
+.box1 {
+    background-color: #ff5733; /* Adjust the background color as needed */
+    animation: moveBox1 5s linear infinite; /* Adjust the animation duration as needed */
+}
+
+.box2 {
+    background-color: #33ff57; /* Adjust the background color as needed */
+    /* left: 100%; Remove this line */
+    animation: moveBox2 5s linear infinite; /* Adjust the animation duration as needed */
+}
+
+.box3 {
+    background-color: #33ff57; /* Adjust the background color as needed */
+    /* left: 100%; Remove this line */
+    animation: moveBox2 5s linear infinite; /* Adjust the animation duration as needed */
+}
+  

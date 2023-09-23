@@ -1,0 +1,36 @@
+
+.note{
+    font-size: larger;
+    color: white;
+}
+
+.agree-label{
+    color:rgb(156, 156, 247);
+    position: relative;
+    left:30px;
+    top:10px;
+}
+.agree-checkbox{
+    position: relative;
+    left:20px;
+    top:10px;
+    transform: scale(1.7);
+}
+
+.proceed{
+    position: relative;
+    left: 50px;
+    top:30px;
+    transform: scale(1.3);
+}
+
+.terms{
+    color: rgb(156, 156, 247);
+}
+
+.container{
+    display: flex;
+    position: relative;
+    top:10%;
+
+}

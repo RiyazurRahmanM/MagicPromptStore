@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1d1d29;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+input[type="text"] {
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+button {
+    background: linear-gradient(to right bottom, violet, gold);
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: large;
+    color: white;
+}
+
+.direct{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.affiliate{
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.checkbox{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    transform: scale(2);
+}
+
+.bottom{
+    display: flex;
+    justify-content: center;
+}

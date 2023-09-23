@@ -1,115 +1,11 @@
+{% extends 'common.html' %}
+{% block link %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <style>
-        .sticky2{
-            padding: 0px;
-            background: burlywood;
-            border-radius: 10px;
-            width: 180px;
-            height: 30px;
-            font-size: medium;
-            position:fixed;
-            right: 0%;
-            top: 5%;
-        }
-        .link{
-            text-decoration: none;
-            color:white;
-            font-size: larger;
-            text-shadow: 3px 3px 2px black;
-        }
+<link rel="stylesheet" href="{% static 'signup.css' %}">
+<link rel="stylesheet" href="{% static 'text_color.css' %}">
+{% endblock %}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #1d1d29;
-            color: white;
-            font-family: 'Times New Roman', Times, serif;
-        }
-
-        .header{
-            display: flex;
-            background-color: #242536;
-            height:170px;
-            padding-top: 30px;
-            justify-content:end;
-            align-items: end;
-            gap:30px;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            position: absolute;
-            left: 10px;
-            top: 10px;
-        }
-
-        .mps {
-            position: absolute;
-            left: 90px;
-            top: 20px;
-            color: gold;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        table {
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table tr td {
-            padding: 5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            border-radius: 5px;
-            padding: 10px;
-            width: 200px;
-        }
-
-        button {
-            background: linear-gradient(to right bottom, violet, gold);
-            border-radius: 10px;
-            width: 200px;
-            height: 50px;
-            font-size: large;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <img src="{% static 'logo.png' %}" width="70px" height="70px" class="logo">
-        <div class="mps">
-            <h1>MagicPromptStore</h1>
-            {%if name%}
-            Welcome Back 
-            {{name}}
-            {% endif %}
-        </div>
-        <div class="header">
-            <a href="{% url 'login_view' %}" class="link">login</a>
-            <a href="{% url 'signup_view' %}" class="link">signup</a>
-            <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
-            <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
-            <a href="{% url 'post_view' %}" class="link">Post</a>
-        </div>
+{%block body%}
     </header>
 
     <main>
@@ -140,3 +36,5 @@
     </main>
 </body>
 </html>
+
+{% endblock %}

@@ -1,10 +1,11 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'common.html' %}
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'pay_form.css' %}">
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock %}
+
+{%block body%}
     <table>
         <th>
             <tr>
@@ -54,3 +55,4 @@
     }
 </script>
 </html>
+{% endblock %}

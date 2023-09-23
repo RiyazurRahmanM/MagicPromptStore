@@ -1,0 +1,36 @@
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'common.css'%}">
+    {% block link%} {% endblock %}
+</head>
+<body>
+    
+    {% load static %}
+
+    <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
+    <div class="mps">
+        <h1>MagicPromptStore</h1>
+        {%if name%}
+        Welcome Back 
+        {{name}}
+        {% endif %}
+    </div>
+
+    <div class="header">
+        <a href="{% url 'login_view' %}" class="link">login</a>
+        <a href="{% url 'signup_view' %}" class="link">signup</a>
+        <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
+        <a href="{% url 'store_view' %}" class="link">Browse</a>
+        <a href="{% url 'post_view' %}" class="link">Post</a>
+    </div>
+    <div class="mine">
+        <button class="sticky"><a class="link2" href="{% url 'my_prompts_view' %}">My Prompts</a></button>
+        <button class="sticky2"><a class="link2" href="{% url 'posted_view' %}">My Account</a></button>
+    </div>
+    {% block body%} {% endblock%}
+</body>
+</html>

@@ -3,6 +3,7 @@ from .models import Prompts , Users, Payment, Delivery, Withdraw, Pay
 from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 from django.core.mail import send_mail
 from django.conf import settings

@@ -1,0 +1,79 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 300px;
+    height: 420px;
+    background-color: #AC39DC;
+    border-radius: 30px;
+    margin: 20px;
+    font-size: large;
+    transition: background-color 0.3s, height 0.3s, font-size 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    width: 300px;
+    height: 430px;
+    background-color: #AC39DC;
+    border-radius: 30px;
+    margin: 20px;
+    font-size: larger;
+}
+
+.title {
+    margin-top: 3px;
+    height: 15%;
+    border-radius: 30px;
+    background-color: hsl(282, 79%, 21%);
+    text-align: center;
+    padding-top: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.description {
+    border-radius: 30px;
+    background-color: #470B60;
+    text-align: center;
+    margin: 10px;
+    padding-top: 10px;
+    height: 75%;
+    font-size: 19px;
+    color: gold;
+}
+
+.sample{
+    position: relative;
+    top:20px;
+    width: 800px;
+}
+.sample_input{
+    background-color: #AC39DC;
+    color: #1d1d29;
+    font-size: larger;
+}
+.sample_output{
+    background-color: #470B60;
+    color: gold;
+    font-size: larger;
+}
+
+.buy_button{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    background-color: wheat;
+    color:#1d1d29;
+    font-size: larger;
+    border-radius: 10px;
+}
+
+.notice{
+    position: relative;
+    top:20px;
+    color:white;
+    font-size: larger;
+}

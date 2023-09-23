@@ -1,9 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% extends 'common.html' %}
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'delivery_form.css' %}">
+{% endblock %}
+
+{%block body%}
 <body>
     <table>
         <th>
@@ -54,3 +55,4 @@
     }
 </script>
 </html>
+{% endblock %}

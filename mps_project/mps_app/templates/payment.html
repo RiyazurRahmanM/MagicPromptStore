@@ -1,86 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        *{
-            margin:0px;
-        }
-        .sticky2{
-            padding: 0px;
-            background: burlywood;
-            border-radius: 10px;
-            width: 180px;
-            height: 30px;
-            font-size: medium;
-            position:fixed;
-            right: 0%;
-            top: 5%;
-        }
-        body{
-            background-color: #1d1d29;
-        }
-        .link{
-            text-decoration: none;
-            color:white;
-            font-size: larger;
-            text-shadow: 3px 3px 2px black;
-        }
-        .header{
-            display: flex;
-            background-color: #242536;
-            height:170px;
-            padding-top: 30px;
-            justify-content:end;
-            align-items: end;
-            gap:30px;
-            flex-wrap: wrap;
-        }
+{% extends 'common.html' %}
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'payment.css' %}">
+{% endblock %}
 
-        .logo{
-            position: absolute;
-            left:10px;
-            top :10px;
-
-        }
-
-        .mps{
-            position: absolute;
-            left:90px;
-            top :20px;
-            color: gold;
-        }
-
-        .qr{
-            display: flex;
-            justify-content: center;
-        }
-
-        .form{
-            color:white;
-        }
-    </style>
-</head>
-<body>
-    {% load static %}
-
-    <img src="{% static 'logo.png'%}" width="70px" height="70px" class="logo">
-    <div class="mps">
-        <h1>MagicPromptStore</h1>
-        {%if name%}
-        Welcome Back 
-        {{name}}
-        {% endif %}
-    </div>
-    <div class="header">
-        <a href="{% url 'login_view' %}" class="link">login</a>
-        <a href="{% url 'signup_view' %}" class="link">signup</a>
-        <a href="{% url 'affiliate_view'%}" class="link">Affiliate</a>
-        <a href="{% url 'store_view' %}" class="link">Browse Prompts</a>
-        <a href="{% url 'post_view' %}" class="link">Post</a>
-    </div>
-
+{%block body%}
     <br>
     <br>
 
@@ -128,3 +52,4 @@
     }
 </script>
 </html>
+{% endblock %}

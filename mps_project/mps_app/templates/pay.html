@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'common.html' %}
+{% block link %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'pay.css' %}">
+{% endblock %}
+
+{%block body%}
     <form method="POST" id="myForm">
         {% csrf_token %}
         KeyWord: <input type="password" name="p">
@@ -12,3 +12,4 @@
     </form>
 </body>
 </html>
+{% endblock %}
