@@ -167,7 +167,7 @@ def store_view(request):
         request.session['thetitle'] = title
         return redirect(reverse('prompt_view'))
 
-    prompts = Prompts.objects.all()
+    prompts = Prompts.objects.filter(prompt_type="free")
 
     context = {
         'prompts' : prompts
@@ -178,6 +178,26 @@ def store_view(request):
     if request.session.get('user')!= 'null':
         context['name'] = request.session.get('email')
     return render(request,'store.html',context)
+
+def paid_view(request):
+    if request.method == 'POST':
+
+        title = request.POST.get('thetitle')
+        request.session['thetitle'] = title
+        return redirect(reverse('prompt_view'))
+
+    prompts = Prompts.objects.filter(prompt_type="paid")
+
+    context = {
+        'prompts' : prompts
+    }
+    if request.session.get('current') == 'post':
+        context['message'] = 'Your Prompt is successfully posted in the store'
+
+    if request.session.get('user')!= 'null':
+        context['name'] = request.session.get('email')
+    return render(request,'paid.html',context)
+
 
 def payment_view(request):
     if request.method == "POST":

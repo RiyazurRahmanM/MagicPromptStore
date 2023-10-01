@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 # Create your models here.
 
 class Prompts(models.Model):
@@ -14,6 +14,12 @@ class Prompts(models.Model):
     sales = models.IntegerField(default=0)
     user = models.ForeignKey('Users',blank=True,null=True,on_delete=models.SET_NULL,related_name='user')
     cost = models.IntegerField(default=29)
+    prompt_type = models.TextField(max_length=5 ,default="free")
+    status=models.TextField(max_length=20,default="published")
+    updated = models.DateTimeField(auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse('store_view')
 
 
 

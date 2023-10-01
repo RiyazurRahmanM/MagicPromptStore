@@ -1,4 +1,4 @@
-        
+
         .grid {
             width: 100%;
             height: 100%;
@@ -65,7 +65,6 @@
             position: relative;
             left: 30%;
         }
-
         .link2{
             text-decoration: none;
             color:black;
@@ -83,7 +82,8 @@
             gap:10%;
 
         }
-        .free{
+
+        .paid{
             background-color:#e6bef7;
             width:200px;
             height:30px;
@@ -98,7 +98,7 @@
             color: black;
             
         }
-        .paid{
+        .free{
             background-color:#AC39DC;
             width:200px;
             height:30px;

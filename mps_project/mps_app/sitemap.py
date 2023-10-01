@@ -6,7 +6,7 @@ class PostSiteMap(Sitemap) :
     priority = 0.9
 
     def items(self):
-        return Prompts.object.filter(status="published")
+        return Prompts.objects.filter(status="published")
     
     def lastmod(self,obj):
         return obj.updated

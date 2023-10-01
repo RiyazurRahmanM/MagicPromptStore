@@ -1,7 +1,7 @@
 {% extends 'common.html' %}
 {% block link %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'store.css' %}">
+<link rel="stylesheet" href="{% static 'paid.css' %}">
 {% endblock %}
 
 {%block body%}
@@ -35,6 +35,7 @@
             {% endfor %}
         </div>
     </div>
+
     <script>
         function onSubmit(title){
             var myform = document.getElementById('myform');

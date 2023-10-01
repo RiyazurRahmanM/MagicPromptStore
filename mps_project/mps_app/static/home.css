@@ -106,18 +106,18 @@ button{
 }
 
 .box1 {
-    background-color: #ff5733; /* Adjust the background color as needed */
+    background-color: goldenrod; /* Adjust the background color as needed */
     animation: moveBox1 5s linear infinite; /* Adjust the animation duration as needed */
 }
 
 .box2 {
-    background-color: #33ff57; /* Adjust the background color as needed */
+    background-color: #450038; /* Adjust the background color as needed */
     /* left: 100%; Remove this line */
     animation: moveBox2 5s linear infinite; /* Adjust the animation duration as needed */
 }
 
 .box3 {
-    background-color: #33ff57; /* Adjust the background color as needed */
+    background-color: darkmagenta; /* Adjust the background color as needed */
     /* left: 100%; Remove this line */
     animation: moveBox2 5s linear infinite; /* Adjust the animation duration as needed */
 }
