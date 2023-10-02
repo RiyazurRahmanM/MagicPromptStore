@@ -27,5 +27,6 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('mps_app.urls')),
-    path('sitemap.xml', sitemap , {'sitemaps':sitemaps}, name = 'from django.contrib.sitemaps.views import sitemap' )
+    path('sitemap.xml', sitemap , {'sitemaps':sitemaps}, name = 'from django.contrib.sitemaps.views import sitemap' ),
+    path('robots.txt',include('robots.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

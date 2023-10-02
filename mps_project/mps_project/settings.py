@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mps_app.apps.MpsAppConfig',
     'django.contrib.sitemaps',
     'django.contrib.sites',
+    'robots',
 ]
 
 MIDDLEWARE = [
