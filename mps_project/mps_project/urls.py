@@ -19,10 +19,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
-from mps_app.sitemap import PostSiteMap
+from mps_app.sitemap import PostSiteMap,HomeSiteMap
 
 sitemaps = {
     'posts':PostSiteMap,
+    'home':HomeSiteMap,
 }
 urlpatterns = [
     path('admin/', admin.site.urls),

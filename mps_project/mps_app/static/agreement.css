@@ -2,6 +2,7 @@
 .note{
     font-size: larger;
     color: white;
+    overflow-y: scroll;
 }
 
 .agree-label{
@@ -33,4 +34,5 @@
     position: relative;
     top:10%;
     height: 100%;
+    overflow-y: visible;
 }

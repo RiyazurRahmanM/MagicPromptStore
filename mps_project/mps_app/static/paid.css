@@ -85,7 +85,7 @@
 
         .paid{
             background-color:#e6bef7;
-            width:200px;
+            width:10%;
             height:30px;
             position: relative;
             top:30%;
@@ -100,7 +100,7 @@
         }
         .free{
             background-color:#AC39DC;
-            width:200px;
+            width:10%;
             height:30px;
             position: relative;
             top:30%;

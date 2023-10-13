@@ -34,12 +34,9 @@
                 <div>
                     {{ prompt.user.email }}
                 </div>
-                <form method="POST" id="myForm">
-                {% csrf_token %}
-                <button onclick="submitFunction()" class="buy_button">Buy Prompt</button>
+                <button onclick="submitFunction()" class="buy_button"><a href="{% url 'seeprompt_view' %}">Reveal Prompt</a></button>
             </div>
         </div>
-    </form>
     
 </body>
 

@@ -55,3 +55,4 @@ class Withdraw(models.Model):
 class Pay(models.Model):
     p = models.TextField()
 
+
